@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace IronPirate.PoseTheCat {
     public class UICtrl : MonoBehaviour {
+        [SerializeField] TMPro.TextMeshProUGUI stageText;
         [SerializeField] Button fitButton;
         [SerializeField] GameObject ingameUI;
         [SerializeField] GameObject winUI;
@@ -14,6 +15,7 @@ namespace IronPirate.PoseTheCat {
             loseUI.SetActive(false);
             fitButton.gameObject.SetActive(false);
             fitButton.onClick.AddListener(StartFit);
+            stageText.text = string.Format("Stage {0}", UserData.CurrentLevel);
 
             EventsDefine.onPoseStart += OnStartGame;
             EventsDefine.onEndGame += OnEndGame;
@@ -35,6 +37,13 @@ namespace IronPirate.PoseTheCat {
 
         private void OnEndGame(bool win) {
             Show(win ? winUI : loseUI);
+            
+            if (win) {
+                UserData.CurrentLevel++;
+                if (UserData.CurrentLevel > Define.MaxLevel) {
+                    UserData.CurrentLevel = 1;
+                }
+            }
         }
 
         private void ShowFitButton() {

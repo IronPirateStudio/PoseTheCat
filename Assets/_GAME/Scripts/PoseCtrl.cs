@@ -20,7 +20,7 @@ namespace IronPirate.PoseTheCat {
         }
 
         private void DoLoseAnim() {
-            transform.DORotate(new Vector3(-90, 0, 0), .2f).SetEase(Ease.InOutBounce);
+            transform.DORotate(new Vector3(-80, 0, 0), .2f).SetEase(Ease.InOutBounce);
         }
     }
 }
